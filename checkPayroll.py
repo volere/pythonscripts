@@ -1,14 +1,14 @@
 import pandas as pd
 import numpy as np
 
+#I use this script to parse through quickbooks transactions
+#for how much I have paid my contractors
+# I added tags for each of my contractors
 
-
-class Person:
+class Contractor:
     def __init__(self, name, values):
         self.name = name
         self.values = [] 
-    
-
     def myfunc(self):
         print("totals for " + self.name)
     def setValues(self):
@@ -19,30 +19,33 @@ class Person:
 
 
         
-        
+##I've removed names and Strings you will have to insert your own strings
+##you can create as many instances as you have contractors
 
-p1 = Person("Lucy",0)
-p2 = Person("Jack",0)
-p3 = Person("Thadeus",0)
+p1 = Contractor("p1",0)
+p2 = Contractor("p2",0)
+p3 = Contractor("p3",0)
 
-data = pd.read_csv('./QB2.csv')
+data = pd.read_csv('PATH_TO_CSV')
 df = pd.DataFrame(data, columns = ['Date', 'Description', 'Amount'])
 ################Grab and print person 1
-Lucy = df[df['Description'].str.contains('cy')].Amount
-p1.values=Lucy
+Name1 = df[df['Description'].str.contains('STRING')].Amount
+p1.values=Name1
 p1.myfunc()
 p1.sumValues()
 ##########Grab and print person 2
-Jack = df[df['Description'].str.contains('J',regex=True)].Amount
-p2.values = Jack 
+Name2 = df[df['Description'].str.contains('STRING',regex=True)].Amount
+p2.values = Name2 
 p2.myfunc()
-##print(df[df['Description'].str.contains('J',regex=True)])
+
 p2.sumValues()
 ###############Grab and print person 3
-Thadeus = df[df['Description'].str.contains('Thad')].Amount
-p3.values = Thadeus
+Name3 = df[df['Description'].str.contains('STRING')].Amount
+p3.values = Name3
 p3.myfunc()
-##print( df[df['Description'].str.contains('Thad')])
+
 p3.sumValues()
+
+#checks total of collected values for to check for 
 
 print(p1.setValues()+ p2.setValues()+p3.setValues())
